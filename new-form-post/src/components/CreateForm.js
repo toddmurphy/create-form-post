@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const FormWrapper = styled.div`
@@ -35,19 +35,51 @@ const CreateButton = styled.button`
     border: none;
     font-size: 1rem;
     font-weight: bold;
-    background: #2196f3;
+    background: #36AB80;
     color: #FFF;
 `
 
-const CreateForm = () => {
+const CreateForm = (props) => {
+    //Set up useState state structure to make a post using properties from FormSetup --> firstname, lastname, email, age
+    //Set up as object
+    const [form, setForm] = useState({
+        firstname: '',
+        lastname: '',
+        email: '',
+        age: Number
+    })
+
+    //setup 'handleChanges' event to watch for changes in input values (event.target.value) --> link to 'name' property of each input
+    const handleChanges = event => {
+        //Computed properties
+        setForm({ ...form, [event.target.name]: event.target.value });
+        console.log(event.target.value)
+    }
+
+    //setup 'submitForm' function to submit a form
+    const submitForm = event => {
+        event.preventDefault();
+        props.addNewPost(form)
+        //resets our form and body back to emtpy strings and clear out the text
+        setForm({
+            firstname: '',
+            lastname: '',
+            email: '',
+            age: ''
+        })
+    }
+
+    const { firstname, lastname, email, age } = props;
     return (
-        <form>
+        <form onSubmit={submitForm}>
             <FormWrapper>
                 <FormContainer>
                     <TextInput
                         name='firstname'
                         type='text'
                         placeholder='First name'
+                        onChange={handleChanges}
+                        value={firstname}
                     />
                 </FormContainer>
                 <FormContainer>
@@ -55,6 +87,8 @@ const CreateForm = () => {
                         name='lastname'
                         type='text'
                         placeholder='Last name'
+                        onChange={handleChanges}
+                        value={lastname}
                     />
                 </FormContainer>
                 <FormContainer>
@@ -62,6 +96,8 @@ const CreateForm = () => {
                         name='email'
                         type='text'
                         placeholder='Email'
+                        onChange={handleChanges}
+                        value={email}
                     />
                 </FormContainer>
                 <FormContainer>
@@ -69,6 +105,8 @@ const CreateForm = () => {
                         name="age"
                         type='number'
                         placeholder='Age'
+                        onChange={handleChanges}
+                        value={age}
                     />
                 </FormContainer>
                 <FormContainer>

@@ -1,22 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
-import FormSetup from './FormSetup';
+
+const PostWrapper = styled.div`
+    border: 2px solid red;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+`
+
+const PostContainer = styled.div`
+    border: dodgerblue;
+    border-radius: 5px;
+    width: 30%;
+    background: dodgerblue;
+    margin: 2% 0;
+    color: #FFF;
+`
 
 const Form = (props) => {
-
     console.log(props)
+
     return (
         <div>
             <h2>Form output component</h2>
-            {props.forms.map(form => (
-                <div key={form.id}>
-                    <p>{form.id}</p>
-                    <p>{form.firstname}</p>
-                    <p>{form.lastname}</p>
-                    <p>{form.email}</p>
-                    <p>{form.age}</p>
-                </div>
-            ))}
+            <PostWrapper>
+                {props.forms.map(form => (
+                    <PostContainer key={form.id}>
+                        <p>ID: {form.id}</p>
+                        <p>First name: {form.firstname}</p>
+                        <p>Last name: {form.lastname}</p>
+                        <p>Email: {form.email}</p>
+                        <p>Age: {form.age}</p>
+                    </PostContainer>
+                ))}
+            </PostWrapper>
         </div>
     )
 }
