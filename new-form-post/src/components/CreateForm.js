@@ -26,14 +26,7 @@ const TextInput = styled.input`
     padding: 0 2%;
     border: 2px solid lightgrey;
 `
-const SelectInput = styled.select`
-    margin: 0 3%;
-    height: 40px;
-    width: 100%;
-    border: 2px solid lightgrey;
-    font-size: 1rem;
-    color: grey;
-`
+
 const CreateButton = styled.button`
     width: 80%;
     height: 50px;
@@ -62,13 +55,6 @@ const CreateForm = () => {
                         name='lastname'
                         type='text'
                         placeholder='Last name'
-                    />
-                </FormContainer>
-                <FormContainer>
-                    <TextInput
-                        name='address'
-                        type='text'
-                        placeholder='Address'
                     />
                 </FormContainer>
                 <FormContainer>
