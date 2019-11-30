@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useForm from 'react-hook-form';
 import styled from 'styled-components';
 
 const FormWrapper = styled.div`
@@ -40,6 +41,7 @@ const CreateButton = styled.button`
 `
 
 const CreateForm = (props) => {
+    const { register, errors, handleSubmit } = useForm();
     //Set up useState state structure to make a post using properties from FormSetup --> firstname, lastname, email, age
     //Set up as object
     const [form, setForm] = useState({
@@ -56,22 +58,19 @@ const CreateForm = (props) => {
         console.log(event.target.value)
     }
 
-    //setup 'submitForm' function to submit a form
-    const submitForm = event => {
-        event.preventDefault();
+    // setup 'submitForm' function to submit a form
+    // required to pass in 'form' and 'event'
+    const onSubmit = (form, event) => {
         props.addNewPost(form)
         //resets our form and body back to emtpy strings and clear out the text
-        setForm({
-            firstname: '',
-            lastname: '',
-            email: '',
-            age: ''
-        })
+        event.target.reset()
+        event.preventDefault();
     }
+
 
     const { firstname, lastname, email, age } = props;
     return (
-        <form onSubmit={submitForm}>
+        <form onSubmit={handleSubmit(onSubmit)}>
             <FormWrapper>
                 <FormContainer>
                     <TextInput
@@ -80,8 +79,10 @@ const CreateForm = (props) => {
                         placeholder='First name'
                         onChange={handleChanges}
                         value={firstname}
+                        ref={register({ required: true })}
                     />
                 </FormContainer>
+                {errors.firstname && <p>This is required</p>}
                 <FormContainer>
                     <TextInput
                         name='lastname'
@@ -89,8 +90,10 @@ const CreateForm = (props) => {
                         placeholder='Last name'
                         onChange={handleChanges}
                         value={lastname}
+                        ref={register({ required: true })}
                     />
                 </FormContainer>
+                {errors.lastname && <p>This is required</p>}
                 <FormContainer>
                     <TextInput
                         name='email'
@@ -98,8 +101,10 @@ const CreateForm = (props) => {
                         placeholder='Email'
                         onChange={handleChanges}
                         value={email}
+                        ref={register({ required: true })}
                     />
                 </FormContainer>
+                {errors.email && <p>This is required</p>}
                 <FormContainer>
                     <TextInput
                         name="age"
@@ -107,8 +112,10 @@ const CreateForm = (props) => {
                         placeholder='Age'
                         onChange={handleChanges}
                         value={age}
+                        ref={register({ required: true })}
                     />
                 </FormContainer>
+                {errors.age && <p>This is required</p>}
                 <FormContainer>
                     <CreateButton type='submit'>Submit form</CreateButton>
                 </FormContainer>

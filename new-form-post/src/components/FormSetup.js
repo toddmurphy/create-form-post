@@ -44,7 +44,6 @@ const FormSetup = () => {
 
     return (
         <div>
-            <h3>Initital form setup/ state- Form setup component</h3>
             <CreateForm addNewPost={addNewPost} />
             <Form forms={forms} />
         </div>

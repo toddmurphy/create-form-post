@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const PostWrapper = styled.div`
-    border: 2px solid red;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -22,7 +21,6 @@ const Form = (props) => {
 
     return (
         <div>
-            <h2>Form output component</h2>
             <PostWrapper>
                 {props.forms.map(form => (
                     <PostContainer key={form.id}>

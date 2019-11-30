@@ -5,7 +5,7 @@ import FormSetup from './components/FormSetup';
 function App() {
   return (
     <div className="App">
-      <h1>Forms create a new post practice</h1>
+      <h1>Forms: Create form with React-Hook-Form validation</h1>
       <FormSetup />
     </div>
   );
